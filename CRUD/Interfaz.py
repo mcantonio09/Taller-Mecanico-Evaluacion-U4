@@ -6,7 +6,7 @@ if ruta_raiz not in sys.path:
 from exceptions.excepciones import CostoInvalidoError, ServicioNoEncontradoError
 import tkinter as tk
 from tkinter import ttk, messagebox
-from ControladorServicios import ControladorServicios
+from CRUD.ControladorServicios import ControladorServicios
 
 class InterfazTkinter:
     def __init__(self, root):

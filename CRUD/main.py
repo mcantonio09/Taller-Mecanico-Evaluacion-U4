@@ -1,5 +1,5 @@
 import tkinter as tk
-from Interfaz import InterfazTkinter
+from CRUD.Interfaz import InterfazTkinter
 
 if __name__ == "__main__":
     root = tk.Tk()

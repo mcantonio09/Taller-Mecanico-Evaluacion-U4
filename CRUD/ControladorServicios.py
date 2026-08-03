@@ -4,8 +4,8 @@ ruta_raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if ruta_raiz not in sys.path:
     sys.path.append(ruta_raiz)
 from exceptions.excepciones import CostoInvalidoError, ServicioNoEncontradoError
-from Servicio import Servicio
-from RepositorioServicios import RepositorioServicios
+from CRUD.Servicio import Servicio
+from CRUD.RepositorioServicios import RepositorioServicios
 
 class ControladorServicios:
     def __init__(self):
