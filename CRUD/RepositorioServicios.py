@@ -3,7 +3,7 @@ from mysql.connector import Error
 from CRUD.Servicio import Servicio
 
 class RepositorioServicios:
-    def __init__(self, host="localhost", user="root", password="Litiid015*", database="db_taller"):
+    def __init__(self, host="localhost", user="root", password="", database="db_taller"):
         self.config = {
             'host': host,
             'user': user,
