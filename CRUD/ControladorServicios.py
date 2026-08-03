@@ -1,16 +1,9 @@
 import sys
 import os
-
-# 1. Obtenemos la ruta absoluta de la carpeta principal del proyecto (un nivel arriba de /CRUD)
 ruta_raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-
-# 2. Agregamos esa ruta al "Path" del sistema para que Python busque ahí
 if ruta_raiz not in sys.path:
     sys.path.append(ruta_raiz)
-
-# 3. Ahora sí, importamos desde la carpeta 'exceptions' el archivo 'excepciones.py'
 from exceptions.excepciones import CostoInvalidoError, ServicioNoEncontradoError
-
 from Servicio import Servicio
 from RepositorioServicios import RepositorioServicios
 

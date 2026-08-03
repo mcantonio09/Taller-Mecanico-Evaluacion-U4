@@ -43,7 +43,7 @@ class RepositorioServicios:
         servicios_lista = []
         try:
             conexion = self._conectar()
-            cursor = conexion.cursor(dictionary=True) # dictionary=True devuelve las filas como diccionarios
+            cursor = conexion.cursor(dictionary=True)
             cursor.execute("SELECT * FROM servicios")
             filas = cursor.fetchall()
             

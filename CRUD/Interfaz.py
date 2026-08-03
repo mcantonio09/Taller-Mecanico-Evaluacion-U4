@@ -1,31 +1,19 @@
 import sys
 import os
-
-# 1. Obtenemos la ruta absoluta de la carpeta principal del proyecto (un nivel arriba de /CRUD)
 ruta_raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-
-# 2. Agregamos esa ruta al "Path" del sistema para que Python busque ahí
 if ruta_raiz not in sys.path:
     sys.path.append(ruta_raiz)
-
-# 3. Ahora sí, importamos desde la carpeta 'exceptions' el archivo 'excepciones.py'
 from exceptions.excepciones import CostoInvalidoError, ServicioNoEncontradoError
-
 import tkinter as tk
 from tkinter import ttk, messagebox
 from ControladorServicios import ControladorServicios
 
 class InterfazTkinter:
-    """
-    Clase responsable de la Vista (GUI).
-    Interactúa exclusivamente con el ControladorServicios.
-    """
     def __init__(self, root):
         self.root = root
         self.root.title("Gestión de Taller Mecánico")
         self.root.geometry("750x500")
         
-        # Instanciamos el controlador
         self.controlador = ControladorServicios()
         self.id_seleccionado = None
 
@@ -34,7 +22,6 @@ class InterfazTkinter:
         self.cargar_datos()
 
     def _crear_widgets(self):
-        # Marco de entrada de datos
         frame_inputs = ttk.LabelFrame(self.root, text="Datos del Servicio", padding=10)
         frame_inputs.pack(fill="x", padx=10, pady=10)
 
@@ -54,7 +41,6 @@ class InterfazTkinter:
         self.entry_costo = ttk.Entry(frame_inputs, width=30)
         self.entry_costo.grid(row=1, column=3, padx=5, pady=5)
 
-        # Marco de botones
         frame_botones = tk.Frame(self.root)
         frame_botones.pack(fill="x", padx=10, pady=5)
 
@@ -64,7 +50,6 @@ class InterfazTkinter:
         ttk.Button(frame_botones, text="Limpiar Campos", command=self.limpiar_campos).pack(side="right", padx=5)
 
     def _configurar_tabla(self):
-        # Configuración del Treeview (Tabla)
         columnas = ("ID", "Cliente", "Vehículo", "Servicio", "Costo")
         self.tabla = ttk.Treeview(self.root, columns=columnas, show="headings")
         
@@ -72,27 +57,21 @@ class InterfazTkinter:
             self.tabla.heading(col, text=col)
             self.tabla.column(col, width=120, anchor="center")
             
-        self.tabla.column("ID", width=50) # Columna ID más pequeña
+        self.tabla.column("ID", width=50)
         self.tabla.pack(fill="both", expand=True, padx=10, pady=10)
         
-        # Evento al hacer clic en una fila
         self.tabla.bind("<ButtonRelease-1>", self.seleccionar_fila)
 
     def cargar_datos(self):
-        """Limpia la tabla y la vuelve a llenar con los datos de la BD."""
-        # Limpiar registros actuales
         for row in self.tabla.get_children():
             self.tabla.delete(row)
             
-        # Solicitar datos al controlador
         servicios = self.controlador.obtener_servicios()
         for s in servicios:
             self.tabla.insert("", "end", values=(s.id_servicio, s.cliente, s.vehiculo, s.tipo_servicio, s.costo))
 
     def registrar(self):
-        """Intenta registrar un servicio capturando posibles errores de negocio."""
         try:
-            # Aquí aplicamos manejo de excepciones en la capa visual
             self.controlador.registrar_servicio(
                 self.entry_cliente.get(),
                 self.entry_vehiculo.get(),
@@ -111,7 +90,6 @@ class InterfazTkinter:
             messagebox.showerror("Error", f"Ocurrió un error inesperado: {e}")
 
     def seleccionar_fila(self, event):
-        """Rellena los Entry con los datos de la fila seleccionada."""
         item_seleccionado = self.tabla.focus()
         if item_seleccionado:
             valores = self.tabla.item(item_seleccionado, 'values')
