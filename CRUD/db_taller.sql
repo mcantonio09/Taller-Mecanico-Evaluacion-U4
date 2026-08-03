@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS db_taller;
+
+USE db_taller;
+
+CREATE TABLE IF NOT EXISTS servicios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente VARCHAR(100) NOT NULL,
+    vehiculo VARCHAR(100) NOT NULL,
+    tipo_servicio VARCHAR(150) NOT NULL,
+    costo DECIMAL(10, 2) NOT NULL
+);
